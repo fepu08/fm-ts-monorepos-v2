@@ -6,7 +6,9 @@ settings:
 
 importers:
 
-  .:
+  .: {}
+
+  packages/ui:
     dependencies:
       cors:
         specifier: ^2.8.5

@@ -180,3 +180,34 @@ This repository is designed to support a hands-on TypeScript monorepos course. T
 - Code quality and linting
 
 Happy coding! 🚀
+
+# Tools
+
+## Manypkg
+
+Manypkg is a linter for package.json files 
+
+```
+pnpm add -D @manypkg/cli
+pnpm manypkg check
+pnpm manypkg fix
+```
+
+## Syncpack
+
+Syncpack helps detect and identify variations in external dependency package versions across a project or monorepo, potentially helping to consolidate versions and improve install times.
+
+Reducing version variance can help improve npm/pnpm install times and create a greater sense of the entire repository advancing together.
+
+Syncpack can be integrated into continuous integration (CI) processes to prevent introducing new package version variations and provide actionable failure messages.
+
+```
+pnpm i syncpack@alpha
+pnpm syncpack lint
+pnpm syncpack fix
+```
+
+## Prettier
+
+Code formatting
+

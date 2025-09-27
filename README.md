@@ -211,3 +211,12 @@ pnpm syncpack fix
 
 Code formatting
 
+## Knip
+
+Knip is a tool that helps us remove unused dependencies and exports from our packages. It's great to detect extraneous dependencies and potentially dead code (or over-exposed code) that TS and eslint don't detect
+
+
+```
+pnpm i -D knip
+```
+

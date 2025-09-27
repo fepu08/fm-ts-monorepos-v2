@@ -1,17 +1,19 @@
 {
-  "name": "seeds",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "build": "pnpm --color run -r build",
-    "test": "pnpm --color run -r test",
-    "lint": "pnpm --color run -r lint",
-    "dev": "pnpm --color run -r dev",
-    "format": "pnpm --color run -r format",
-    "check": "pnpm --color run -r check"
-  },
-  "devDependencies": {
-    "@manypkg/cli": "^0.25.1",
-    "syncpack": "14.0.0-alpha.21"
-  }
+	"name": "seeds",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"build": "pnpm --color run -r build",
+		"test": "pnpm --color run -r test",
+		"lint": "pnpm --color run -r lint",
+		"dev": "pnpm --color run -r dev",
+		"format": "prettier --write packages/*/{src,tests}/**/*.ts packages/*/{tailwind.config.js,postcss.config.cjs,vite.config.ts,svelte.config.js}",
+		"check": "pnpm --color run -r check"
+	},
+	"devDependencies": {
+		"@manypkg/cli": "^0.25.1",
+		"prettier": "^3.5.3",
+		"prettier-plugin-svelte": "^3.4.0",
+		"syncpack": "14.0.0-alpha.21"
+	}
 }

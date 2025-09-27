@@ -6,7 +6,7 @@
 		"build": "pnpm --color run -r build",
 		"test": "pnpm --color run -r test",
 		"lint": "pnpm --color run -r lint",
-		"dev": "pnpm --color run -r dev",
+		"dev": "concurrently -n \"Server,Models,Client\" -c \"yellow,green,blue\" \"pnpm --filter=server run dev\" \"pnpm --filter=models run dev\" \"pnpm --filter=ui run dev\"",
 		"format": "prettier --write packages/*/{src,tests}/**/*.ts packages/*/{tailwind.config.js,postcss.config.cjs,vite.config.ts,svelte.config.js}",
 		"check": "pnpm --color run -r check"
 	},
@@ -14,6 +14,7 @@
 		"@eslint/js": "^9.28.0",
 		"@manypkg/cli": "^0.25.1",
 		"@types/node": "^24.0.0",
+		"concurrently": "^9.1.2",
 		"eslint": "^9.28.0",
 		"knip": "^5.64.1",
 		"prettier": "^3.5.3",

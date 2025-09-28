@@ -26,3 +26,4 @@ coverage
 
 **/tsconfig.build.tsbuildinfo
 
+**/temp

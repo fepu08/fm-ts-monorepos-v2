@@ -19,22 +19,27 @@ cd ts-monorepos-v2
 
 ### 2. Node Version Management
 
-This project uses Node.js version 22.16.0. 
+This project uses Node.js version 22.16.0.
 
 #### Volta
+
 Volta is a great tool for managing node versions across different projects. Get it at [https://volta.sh](volta.sh)
 
 You can install volta in any POSIX-compliant operating system that supports `curl` by running
+
 ```sh
 curl https://get.volta.sh | bash
 ```
+
 You may need to close and reopen your terminal before your can verify that your environment has volta installed
+
 ```sh
 volta --version
-> 2.0.2 
+> 2.0.2
 ```
 
 #### Nvm
+
 If you have `nvm` (Node Version Manager) installed, you can automatically use the correct version:
 
 ```bash
@@ -42,12 +47,15 @@ nvm use
 ```
 
 ### 3. Install `pnpm` if you don't have it already
+
 Make sure you have [`pnpm`](https://pnpm.io/) installed.
 
 If you use `volta` you can just run
+
 ```sh
 volta install pnpm
 ```
+
 Alternatively you can follow [`pnpm`'s direct installation instructions](https://pnpm.io/installation)
 
 ### 3. Install Dependencies
@@ -71,19 +79,22 @@ pnpm run test       # Test the project
 ```sh
 pnpm run dev
 ```
-* You should be able to go to http://localhost:3000/api/seeds in a browser and see some JSON
-* You should be able to go to http://localhost:5173/ and see a UI that looks like this
+
+- You should be able to go to http://localhost:3000/api/seeds in a browser and see some JSON
+- You should be able to go to http://localhost:5173/ and see a UI that looks like this
 
 ## Available Scripts
 
 ### Development Scripts
 
 - **`pnpm run dev`** - Start both the server and client in development mode with hot reload
+
   - Runs the Express server and Vite dev server concurrently
   - Server runs on the backend, client runs on the frontend
   - Uses colored output to distinguish between server (yellow) and client (blue) logs
 
 - **`pnpm run dev-server`** - Start only the Express server in development mode
+
   - Runs the backend API server using `tsx`
 
 - **`pnpm run dev-client`** - Start only the Vite development server
@@ -92,6 +103,7 @@ pnpm run dev
 ### Build Scripts
 
 - **`pnpm run build`** - Build the project for production
+
   - Creates optimized build files in the `dist` directory
 
 - **`pnpm run preview`** - Preview the production build locally
@@ -100,13 +112,16 @@ pnpm run dev
 ### Testing Scripts
 
 - **`pnpm run test`** - Run tests once (no watch mode)
+
   - Useful for CI/CD pipelines
 
 - **`pnpm run test:watch`** - Run tests in watch mode
+
   - Uses Vitest for running tests
   - Automatically re-runs tests when files change
 
 - **`pnpm run test:ui`** - Run tests with Vitest UI
+
   - Opens a web interface for running and viewing tests
 
 - **`pnpm run test:coverage`** - Run tests with coverage report
@@ -115,6 +130,7 @@ pnpm run dev
 ### Quality Assurance Scripts
 
 - **`pnpm run check`** - Run TypeScript and Svelte type checking
+
   - Validates TypeScript types across the project
 
 - **`pnpm run lint`** - Run ESLint to check code quality
@@ -147,16 +163,19 @@ ts-monorepos-v2/
 ## Getting Started with Development
 
 1. **Start the development environment**:
+
    ```bash
    pnpm run dev
    ```
 
 2. **Run tests**:
+
    ```bash
    pnpm run test
    ```
 
 3. **Check code quality**:
+
    ```bash
    pnpm run lint
    pnpm run check
@@ -185,7 +204,7 @@ Happy coding! 🚀
 
 ## Manypkg
 
-Manypkg is a linter for package.json files 
+Manypkg is a linter for package.json files
 
 ```
 pnpm add -D @manypkg/cli
@@ -215,8 +234,28 @@ Code formatting
 
 Knip is a tool that helps us remove unused dependencies and exports from our packages. It's great to detect extraneous dependencies and potentially dead code (or over-exposed code) that TS and eslint don't detect
 
-
 ```
 pnpm i -D knip
 ```
 
+## Microsoft API Extractor and API Documenter
+
+### @microsoft/api-extractor
+
+API Extractor analyzes your project—primarily the declaration (`.d.ts`) files in your build output—and generates a rollup.  
+It produces a single `.d.ts` file and also creates an API report.
+
+Use it when working with a library-shaped package in a monorepo.
+
+```
+pnpm i -D @microsoft/api-extractor
+pnpm api-extractor init
+pnpm api-extractor run --local --verbose
+```
+
+### @microsoft/api-documenter
+
+```
+pnpm i -D @microsoft/api-documenter
+pnpm api-documenter markdown -i temp -o docs
+```

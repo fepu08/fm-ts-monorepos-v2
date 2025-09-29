@@ -319,3 +319,14 @@ pnpm lerna run test --since=course-progress
 
 - Coordinates multi-package releases in large teams.
 - Ensures proper ordering of dependency publishing (e.g., publish a library before apps depending on it).
+
+## Nx
+
+The main benefit of **remote caching** in `nx` is to enable sharing of build results across different machines.
+
+nx plugins primarily helps with replacing npm scripts with configurable tasks
+
+```bash
+pnpm install -g nx
+pnpm dlx nx init
+```

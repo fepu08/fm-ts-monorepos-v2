@@ -206,7 +206,7 @@ Happy coding! 🚀
 
 Manypkg is a linter for package.json files
 
-```
+```bash
 pnpm add -D @manypkg/cli
 pnpm manypkg check
 pnpm manypkg fix
@@ -220,7 +220,7 @@ Reducing version variance can help improve npm/pnpm install times and create a g
 
 Syncpack can be integrated into continuous integration (CI) processes to prevent introducing new package version variations and provide actionable failure messages.
 
-```
+```bash
 pnpm i syncpack@alpha
 pnpm syncpack lint
 pnpm syncpack fix
@@ -234,7 +234,7 @@ Code formatting
 
 Knip is a tool that helps us remove unused dependencies and exports from our packages. It's great to detect extraneous dependencies and potentially dead code (or over-exposed code) that TS and eslint don't detect
 
-```
+```bash
 pnpm i -D knip
 ```
 
@@ -247,7 +247,7 @@ It produces a single `.d.ts` file and also creates an API report.
 
 Use it when working with a library-shaped package in a monorepo.
 
-```
+```bash
 pnpm i -D @microsoft/api-extractor
 pnpm api-extractor init
 pnpm api-extractor run --local --verbose
@@ -255,7 +255,67 @@ pnpm api-extractor run --local --verbose
 
 ### @microsoft/api-documenter
 
-```
+```bash
 pnpm i -D @microsoft/api-documenter
 pnpm api-documenter markdown -i temp -o docs
 ```
+
+## Lerna (with nx)
+
+Lerna is a tool for managing **JavaScript/TypeScript monorepos**. Lerna works well with `pnpm` as well.
+
+`nx` cache task artifacts
+
+```bash
+pnpm dlx lerna init
+pnpm lerna run build
+pnpm lerna run lint
+
+# Run the scripts "build", "lint", "test", and "check" across all packages.
+# The --stream flag outputs logs from different packages in real-time (interleaved).
+pnpm lerna run build,lint,test,check --stream
+
+# Run the same scripts, but limit concurrency to 2.
+# This means only 2 packages will run their scripts at the same time.
+pnpm lerna run build,lint,test,check --concurrency=2
+
+# Run the scripts only in the package that matches the given scope (@seeds/ui).
+# Useful for targeting a specific package instead of all packages.
+pnpm lerna run build,lint,test,check --scope=@seeds/ui
+
+# Run the "test" script only in packages that have changed since the "course-progress" git ref (branch, tag, or commit).
+# Great for CI/CD optimizations — only tests changed/affected packages.
+pnpm lerna run test --since=course-progress
+
+```
+
+### Key Use Cases
+
+#### 1. Versioning Strategy
+
+- **Independent mode**: Each package can have its own version.
+- **Fixed/locked mode**: All packages share the same version.
+- Handles automatic version bumps based on commit history (when paired with `conventional-commits`).
+
+#### 2. Publishing Workflow
+
+- Automates publishing updated packages to npm.
+- Skips unchanged packages.
+- Works with both public and private registries.
+
+#### 3. Changelog Generation
+
+- Generates changelogs per package or for the whole monorepo.
+- Provides clear release notes based on commits.
+
+#### 4. Orchestrating Commands
+
+- Run scripts across packages (`build`, `test`, `lint`) with filters:
+  - By package name.
+  - By changed/affected packages since last commit.
+- Example: run tests only in changed packages instead of the whole repo.
+
+#### 5. Release Management
+
+- Coordinates multi-package releases in large teams.
+- Ensures proper ordering of dependency publishing (e.g., publish a library before apps depending on it).
